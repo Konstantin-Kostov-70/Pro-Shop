@@ -1,10 +1,19 @@
 import React from 'react'
+import { Container, Navbar, Nav, } from 'react-bootstrap'
 
 function header() {
   return (
-    <div>
-      <header>Header</header>
-    </div>
+    <header>
+     <Navbar bg="dark" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand href="/">ProShop</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="/cart"><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
+            <Nav.Link href="/login"><i className='fas fa-user'></i>Login</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    </header>
   )
 }
 
