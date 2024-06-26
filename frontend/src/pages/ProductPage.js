@@ -15,7 +15,7 @@ function ProductPage() {
     } 
 
     fetchProducts();
-  })
+  }, [id])
 
   return (
     <div>
