@@ -12,10 +12,10 @@ function Header() {
           </LinkContainer>
           <Nav className="me-auto">
             <LinkContainer to="/cart">
-              <Nav.Link><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
+              <Nav.Link><i className='fas fa-shopping-cart'></i><span className='nav-span'>Cart</span></Nav.Link>
             </LinkContainer>
             <LinkContainer to="/login">
-              <Nav.Link><i className='fas fa-user'></i>Login</Nav.Link>
+              <Nav.Link><i className='fas fa-user'></i><span className='nav-span'>Login</span></Nav.Link>
             </LinkContainer>
           </Nav>
         </Container>
