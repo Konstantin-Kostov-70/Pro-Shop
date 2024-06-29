@@ -2,6 +2,28 @@ main {
     min-height: 80vh;
 }
 
+a {
+    text-decoration: none !important;
+}
+
+h1 {
+    font-size: 1.8rem;
+    padding: 1rem 0;
+}
+
+h2 {
+    font-size: 1.4rem;
+    padding: 0.5rem 0;
+}
+
+.nav-span {
+    margin-left: 8px;
+}
+
+span {
+    margin-right: 10px;
+}
+
 .rating span {
     margin: 0.1rem;
 }
@@ -12,4 +34,37 @@ h3 {
 
 .btn-block {
     width: 100%;
+}
+
+#price,
+#status {
+    height: 77px;
+}
+
+#plus-btn,
+#minus-btn {
+    font-size: 20px;
+}
+
+#minus-btn {
+    margin-left: 20px;
+}
+
+#plus-btn:disabled,
+#minus-btn:disabled {
+    background-color: light-dark(rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3));
+    color: light-dark(rgba(16, 16, 16, 0.3), rgba(255, 255, 255, 0.3));
+    border-color: light-dark(rgba(118, 118, 118, 0.3), rgba(195,  195, 195, 0.3));
+}
+
+#cart-items .row {
+    align-items: center;
+}
+
+.fas.fa-trash {
+    font-size: 18px;
+}
+
+.checkout {
+    margin-top: 80px;
 }
