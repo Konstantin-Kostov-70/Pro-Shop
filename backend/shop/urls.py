@@ -1,12 +1,20 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 
 urlpatterns = [
-    path('users/login/', views.MyTokenObtainPairView.as_view(), name='my_token_obtain_pair'),
-    path('users/register/', views.register_user, name='register'),
-    path('users/', views.get_users, name='users'),
-    path('users/profile/', views.get_user_profile, name='user-profile'),
-    path('products/', views.get_products, name='products'),
-    path('products/<str:pk>/', views.get_product, name='product'),
+    path('users/', include ([
+        path('', views.get_users, name='users'),
+        path('login/', views.MyTokenObtainPairView.as_view(), name='my_token_obtain_pair'),
+        path('register/', views.register_user, name='register'),
+        path('profile/', views.get_user_profile, name='user-profile'),
+    ])),
+
+    path('products/', include([
+        path('', views.get_products, name='products'),
+        path('<str:pk>/', views.get_product, name='product'),
+    ]))
 ]
+
+
+   
