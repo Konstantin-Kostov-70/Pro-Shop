@@ -8,6 +8,7 @@ urlpatterns = [
         path('login/', views.MyTokenObtainPairView.as_view(), name='my_token_obtain_pair'),
         path('register/', views.register_user, name='register'),
         path('profile/', views.get_user_profile, name='user-profile'),
+        path('profile/update/', views.update_user_profile, name='update-profile'),
     ])),
 
     path('products/', include([
