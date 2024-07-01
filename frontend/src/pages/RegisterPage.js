@@ -15,6 +15,7 @@ import { register } from "../actions/userActions";
 import FormContainer from "../components/FormContainer";
 
 function RegisterPage() {
+  
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -99,11 +100,11 @@ function RegisterPage() {
             </FormGroup>
             <Button className="my-4" type="submit" variant="primary">Register</Button>
             <Row className="py-3">
-            <Col>
+              <Col>
                 Have an account?
                 <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>Sign In</Link>
-            </Col>
-        </Row>
+              </Col>
+           </Row>
         </Form>
     </FormContainer>
   )
