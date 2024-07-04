@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
-import QuantityAdjuster from "../components/QuantityAdjuster"; // Import the new component
+import QuantityAdjuster from "../components/QuantityAdjuster"; 
 
 function CartPage() {
 
@@ -41,7 +41,7 @@ function CartPage() {
   };
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping');
+    navigate('/login?redirect=/shipping');
   }
 
   const decreaseQty = (item) => {
