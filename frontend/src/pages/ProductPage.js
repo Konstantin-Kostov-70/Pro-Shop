@@ -39,7 +39,7 @@ function ProductPage() {
   return (
     <div>
       <Link to="/" className="btn btn-light my-3">
-        &lt;&lt; Go Back
+        &lt;&lt; Back to shop
       </Link>
       {loading ? (
         <Loader />
