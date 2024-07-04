@@ -18,7 +18,7 @@ function Header() {
   return (
     <header>
      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
+        <Container className='nav-menu'>
           <LinkContainer to="/">
             <Navbar.Brand>ProShop</Navbar.Brand>
           </LinkContainer>
