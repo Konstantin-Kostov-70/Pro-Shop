@@ -44,6 +44,10 @@ function CartPage() {
     navigate('/login?redirect=/shipping');
   }
 
+  const backToShopHandler = () => {
+    navigate('/');
+  }
+
   const decreaseQty = (item) => {
     if (item.qty > 1) {
       dispatch(addToCart(item.product, Number(item.qty) - 1));
@@ -116,6 +120,15 @@ function CartPage() {
                 onClick={checkoutHandler}
               >
                 Proceed To Checkout
+              </Button>
+            </ListGroupItem>
+            <ListGroupItem className="py-2 px-3">
+              <Button
+                type="button"
+                className="btn-block"
+                onClick={backToShopHandler}
+              >
+                Continue with Shopping
               </Button>
             </ListGroupItem>
         </Card>
