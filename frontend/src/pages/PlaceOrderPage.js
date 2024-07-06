@@ -1,22 +1,53 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Row, Col, Button, Image, ListGroup, ListGroupItem, Card } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
+import { createOrder } from '../actions/orderActions'
+import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 
 function PlaceOrderPage() {
 
+  const navigate = useNavigate();
+  const orderCreate = useSelector(state => state.orderCreate)
+  const {order, error, success} = orderCreate
+
   const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
 
   const itemPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2);
-  const shippingPrice = (itemPrice > 500 ? 0 : 12).toFixed(2);
-  const taxPrice = Number(itemPrice * 0.082).toFixed(2);
+
+  let shippingPrice = 0
+  let taxPrice = 0
+
+
+  if (itemPrice !== 0) {
+    shippingPrice = (itemPrice > 500 ? 0 : 12).toFixed(2);
+    taxPrice = Number(itemPrice * 0.082).toFixed(2);
+  } 
+
   const totalPrice = (Number(itemPrice) + Number(shippingPrice) + Number(taxPrice)).toFixed(2);
 
+  useEffect(() => {
+    if (success) {
+       navigate(`/order/${order._id}`)
+       dispatch({type: ORDER_CREATE_RESET})
+    }
+  }, [success, navigate, dispatch ,order])
+
   const placeOrder = () => {
-    console.log('placed order');
+    dispatch(createOrder({
+      orderItems: cart.cartItems,
+      shippingAddress: cart.shippingAddress,
+      paymentMethod: cart.paymentMethod,
+      itemPrice,
+      shippingPrice,
+      taxPrice,
+      totalPrice,
+    }))
   };
+
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -96,6 +127,9 @@ function PlaceOrderPage() {
                   <Col>Total: </Col>
                   <Col>${totalPrice}</Col>
                 </Row>
+              </ListGroupItem>
+              <ListGroupItem>
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroupItem>
               <ListGroupItem>
                 <Button 
