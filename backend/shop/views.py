@@ -52,6 +52,7 @@ def get_user_profile(request):
    serializer = UserSerializer(user, many=False)
    return Response(serializer.data)
 
+
 @api_view(['PUT'])
 @permission_classes([IsAuthenticated])
 def update_user_profile(request):
@@ -141,4 +142,19 @@ def add_order_items(request):
     return Response(serializer.data)
     
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_order_by_id(request, pk):
+    user = request.user
+
+    try:
+        order = Order.objects.get(_id=pk)
+
+        if user.is_staff or order.user == user:
+            serializer = OrderSerializer(order, many=False)
+            return Response(serializer.data)
+        
+        return Response({'detail': 'Not authorized view this order'}, status=status.HTTP_400_BAD_REQUEST)
+    except:
+        return  Response({'detail': 'Order does not exist'}, status=status.HTTP_400_BAD_REQUEST)
   

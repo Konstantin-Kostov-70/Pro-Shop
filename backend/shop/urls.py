@@ -15,8 +15,11 @@ urlpatterns = [
         path('', views.get_products, name='products'),
         path('<str:pk>/', views.get_product, name='product'),
     ])),
-
-    path('orders/add/', views.add_order_items, name='add-order-items'),
+    
+    path('orders/', include([
+        path('add/', views.add_order_items, name='add-order-items'),
+        path('<str:pk>/', views.get_order_by_id, name='user_order')
+    ])),
 ]
 
 
