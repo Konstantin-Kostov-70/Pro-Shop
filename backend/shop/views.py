@@ -98,7 +98,7 @@ def add_order_items(request):
     user = request.user
     data = request.data
 
-    order_items = data['order_items']
+    order_items = data['orderItems']
 
     if order_items and len(order_items) == 0:
        return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
@@ -122,7 +122,7 @@ def add_order_items(request):
         )
 
         for x in order_items:
-            product = Product.objects.get(id=x['product'])
+            product = Product.objects.get(_id=x['product'])
 
             item = OrderItem.objects.create(
                 product = product,
@@ -132,11 +132,11 @@ def add_order_items(request):
                 price = x['price'],
                 image = product.image.url,
             )
-            
-            product.countInStock -= item.qty
+           
+            product.countInStock -= int(item.qty)
             product.save()
-
-    serializer = OrderSerializer(order, many=False)
+        print(data)
+        serializer = OrderSerializer(order, many=False)
 
     return Response(serializer.data)
     
