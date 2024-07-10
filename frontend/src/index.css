@@ -95,6 +95,10 @@ h3 {
   border-bottom: 1px solid gray !important;
 }
 
+.group-border {
+  border: 1px solid gray !important;
+}
+
 .order-items .row{
   align-items: center;
 }
@@ -105,6 +109,10 @@ h3 {
 
 .heading-xs {
   margin-bottom: 20px;
+}
+
+.fas.fa-times {
+  color: red;
 }
 
 /* ------ Stepper------ */
