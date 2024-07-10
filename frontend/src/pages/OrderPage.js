@@ -113,7 +113,7 @@ function OrderPage() {
                   {order.paymentMethod}
                 </p>
                 {order.isPaid ? (
-                  <Message variant="success">Paid on: {order.payAt}</Message>
+                  <Message variant="success">Paid on: {order.payAt.substring(0, 19)}</Message>
                 ) : (
                   <Message variant="warning">Not Paid</Message>
                 )}
@@ -148,33 +148,33 @@ function OrderPage() {
             </ListGroup>
           </Col>
           <Col md={4}>
-            <Card className="h-100">
+            <Card className="h-100 group-border">
               <ListGroup
-                className="h-100 justify-content-between"
+                className="h-100 justify-content-between  pt-3"
                 variant="flush"
               >
-                <ListGroupItem>
+                <ListGroupItem className="payment list-group-item">
                   <h4 className="heading-xs">Order Summary</h4>
                 </ListGroupItem>
-                <ListGroupItem>
+                <ListGroupItem className="payment list-group-item">
                   <Row>
                     <Col>Items: </Col>
                     <Col>${itemPrice}</Col>
                   </Row>
                 </ListGroupItem>
-                <ListGroupItem>
+                <ListGroupItem className="payment list-group-item">
                   <Row>
                     <Col>Shipping: </Col>
                     <Col>${order.shippingPrice}</Col>
                   </Row>
                 </ListGroupItem>
-                <ListGroupItem>
+                <ListGroupItem className="payment list-group-item">
                   <Row>
                     <Col>Tax: </Col>
                     <Col>${order.taxPrice}</Col>
                   </Row>
                 </ListGroupItem>
-                <ListGroupItem>
+                <ListGroupItem className="payment list-group-item">
                   <Row>
                     <Col>Total: </Col>
                     <Col>${order.totalPrice}</Col>
