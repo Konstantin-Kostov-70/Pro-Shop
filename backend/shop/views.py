@@ -105,7 +105,7 @@ def add_order_items(request):
     if order_items and len(order_items) == 0:
        return Response({'detail': 'No Order Items'}, status=status.HTTP_400_BAD_REQUEST)
     else:
-        # (1) create Order
+       
         order = Order.objects.create(
             user = user,
             paymentMethod = data['paymentMethod'],
@@ -114,7 +114,6 @@ def add_order_items(request):
             totalPrice = data['totalPrice'],
         )
 
-        # (2) create shipping address
         shippingAddress = ShippingAddress.objects.create(
             order = order,
             address = data['shippingAddress']['address'],
@@ -169,3 +168,13 @@ def update_order_to_paid(request, pk):
     order.save()
 
     return Response('Order is paid')
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_orders(request):
+    user = request.user
+    order = user.order_set.all()
+    serializer = OrderSerializer(order, many=True)
+
+    return Response(serializer.data)
