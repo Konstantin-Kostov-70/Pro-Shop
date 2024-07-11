@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {Link ,useNavigate } from "react-router-dom";
 import {
   Form,
   FormGroup,
@@ -9,7 +9,6 @@ import {
   Col,
   Table,
 } from "react-bootstrap";
-import { LinkContainer } from 'react-router-bootstrap'
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,7 +43,7 @@ function ProfilePage() {
       if(!userInfo) {
          navigate('/login');
       } else {
-            if(!user || !user.name || success) {
+            if(!user || !user.name || success || userInfo._id !== user._id) {
                 dispatch({type: USER_UPDATE_PROFILE_RESET});
                 dispatch(getUserDetails('profile'));
                 dispatch(listMyOrders());
@@ -151,11 +150,11 @@ function ProfilePage() {
                                     <i className="fas fa-times"></i>
                                 )}</td>
                                 <td>
-                                    <LinkContainer to={`/order/${order._id}`}>
+                                    <Link to={`/order/${order._id}`}>
                                         <Button className="btn-sm">
                                             Details
                                         </Button>
-                                    </LinkContainer>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}
