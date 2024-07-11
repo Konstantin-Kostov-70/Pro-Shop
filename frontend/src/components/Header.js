@@ -43,10 +43,10 @@ function Header() {
                 <Link to={'/admin/users-list'} className='dropdown-item'>
                   Users
                 </Link>
-                <Link to={'/admin/productlist'} className='dropdown-item'>
+                <Link to={'/admin/product-list'} className='dropdown-item'>
                   Products
                 </Link>
-                <Link to={'/admin/orderlist'} className='dropdown-item'>
+                <Link to={'/admin/order-list'} className='dropdown-item'>
                   Orders
                 </Link>
               </NavDropdown>
