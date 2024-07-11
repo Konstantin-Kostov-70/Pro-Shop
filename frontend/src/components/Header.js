@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 
 function Header() {
@@ -19,24 +19,37 @@ function Header() {
     <header>
      <Navbar bg="dark" data-bs-theme="dark">
         <Container className='nav-menu'>
-          <LinkContainer to="/">
-            <Navbar.Brand>ProShop</Navbar.Brand>
-          </LinkContainer>
+          <Link to="/" className='navbar-brand'>
+            ProShop
+          </Link>
           <Nav className="me-auto">
-            <LinkContainer to="/cart">
-              <Nav.Link><i className='fas fa-shopping-cart'></i><span className='nav-span'>Cart</span></Nav.Link>
-            </LinkContainer>
+            <Link to="/cart" className='nav-link'>
+              <i className='fas fa-shopping-cart'></i><span className='nav-span'>Cart</span>
+            </Link>
             {userInfo ? (
               <NavDropdown title={userInfo.name} id='username'>
-                <LinkContainer to={'/profile'}>
-                   <NavDropdown.Item>Profile</NavDropdown.Item>
-                </LinkContainer>
+                <Link to={'/profile'} className='dropdown-item'>
+                   Profile
+                </Link>
                 <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
-              <LinkContainer to="/login">
-                <Nav.Link><i className='fas fa-user'></i><span className='nav-span'>Login</span></Nav.Link>
-              </LinkContainer>
+              <Link to="/login" className='nav-link'>
+                <i className='fas fa-user'></i><span className='nav-span'>Login</span>
+              </Link>
+            )}
+            {userInfo && userInfo.is_admin && (
+              <NavDropdown title='Admin' id='admin-menu'>
+                <Link to={'/admin/users-list'} className='dropdown-item'>
+                  Users
+                </Link>
+                <Link to={'/admin/productlist'} className='dropdown-item'>
+                  Products
+                </Link>
+                <Link to={'/admin/orderlist'} className='dropdown-item'>
+                  Orders
+                </Link>
+              </NavDropdown>
             )}
           </Nav>
         </Container>
