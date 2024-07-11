@@ -72,6 +72,15 @@ def update_user_profile(request):
     return Response(serializer.data)
 
 
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_user(request, pk):
+    user = User.objects.get(id=pk)
+    user.delete()
+
+    return Response('User was Deleted!')
+
+
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
 def get_users(request):
@@ -178,3 +187,5 @@ def my_orders(request):
     serializer = OrderSerializer(order, many=True)
 
     return Response(serializer.data)
+
+
