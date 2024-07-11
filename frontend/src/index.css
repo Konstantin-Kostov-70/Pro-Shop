@@ -115,6 +115,21 @@ h3 {
   color: red;
 }
 
+.fas.fa-check {
+  color: green;
+}
+
+.fas.fa-edit,
+.fas.fa-trash  {
+  color: black;
+  font-size: 15px;
+}
+
+.btn-sm.edit,
+.btn-sm.edit.btn.btn-primary {
+  background-color: transparent ;
+}
+
 /* ------ Stepper------ */
 
 .stepper-wrapper {
