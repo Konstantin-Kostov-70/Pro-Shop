@@ -130,6 +130,20 @@ h3 {
   background-color: transparent ;
 }
 
+.form-check-input {
+  margin: -5px 10px 0 0 !important;
+  /* margin-left: 0 !important;
+  margin-right: 10px !important; */
+  border: 0.5px solid  gray !important;
+}
+
+.form-check.check-box {
+  height: 48px;
+  display: flex ;
+  align-items: center;
+  color: grey;
+}
+
 /* ------ Stepper------ */
 
 .stepper-wrapper {
