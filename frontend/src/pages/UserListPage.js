@@ -63,7 +63,7 @@ function UserListPage() {
                             <i className="fas fa-times"></i>
                         )}</td>
                         <td>
-                            <Link to={`/admin/user/${user._id}`}>
+                            <Link to={`/admin/user/${user._id}/edit`}>
                                 <Button className="btn-sm edit">
                                     <i className="fas fa-edit"></i>
                                 </Button>
