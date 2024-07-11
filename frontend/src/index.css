@@ -125,6 +125,10 @@ h3 {
   font-size: 15px;
 }
 
+.fas.fa-plus {
+  margin-right: 10px;
+}
+
 .btn-sm.edit,
 .btn-sm.edit.btn.btn-primary {
   background-color: transparent ;
@@ -142,6 +146,10 @@ h3 {
   display: flex ;
   align-items: center;
   color: grey;
+}
+
+#products-wrapper {
+  margin-bottom: 50px;
 }
 
 /* ------ Stepper------ */
