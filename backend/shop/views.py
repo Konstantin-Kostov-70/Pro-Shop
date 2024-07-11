@@ -44,6 +44,14 @@ def register_user(request):
     except:
         message = {'detail': 'User with this email already exist'}
         return Response(message, status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def get_users(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -83,9 +91,27 @@ def delete_user(request, pk):
 
 @api_view(['GET'])
 @permission_classes([IsAdminUser])
-def get_users(request):
-    users = User.objects.all()
-    serializer = UserSerializer(users, many=True)
+def get_user_by_id(request, pk):
+    user = User.objects.get(id=pk)
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def update_user(request, pk):
+    user = User.objects.get(id=pk)
+
+    data = request.data
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['is_admin']
+   
+    user.save()
+
+    serializer = UserSerializer(user, many=False)
+
     return Response(serializer.data)
 
 
