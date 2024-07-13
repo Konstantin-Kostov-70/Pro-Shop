@@ -7,17 +7,19 @@ import {
   ListGroup,
   ListGroupItem,
   Card,
+  Button,
 } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getOrderDetails, payOrder } from "../actions/orderActions";
-import { ORDER_PAY_RESET } from '../constants/orderConstants'
+import { getOrderDetails, payOrder, deliverOrderAction } from "../actions/orderActions";
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET} from '../constants/orderConstants'
 
 
 function OrderPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const orderDetails = useSelector((state) => state.orderDetails);
@@ -25,6 +27,12 @@ function OrderPage() {
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const [sdkReady, setSdkReady] = useState(false);
 
@@ -47,9 +55,16 @@ function OrderPage() {
   };
 
   useEffect(() => {
-    if (!order || successPay || order._id !== Number(id)) {
+    if (!userInfo) {
+      navigate('/login')
+    }
+
+    if (!order || successPay || order._id !== Number(id) || successDeliver) {
+
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(id));
+
     } else if (!order.isPaid) {
       if (!window.paypal) {
         addPayPalScript();
@@ -57,7 +72,7 @@ function OrderPage() {
         setSdkReady(true);
       }
     }
-  }, [dispatch, id, order, successPay]);
+  }, [dispatch, id, order, successPay, successDeliver, navigate, userInfo]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(id, paymentResult));
@@ -67,6 +82,10 @@ function OrderPage() {
     itemPrice = order.orderItems
       .reduce((acc, item) => acc + item.price * item.qty, 0)
       .toFixed(2);
+  }
+
+  const deliverHandler = () => {
+    dispatch(deliverOrderAction(order))
   }
 
 
@@ -99,7 +118,7 @@ function OrderPage() {
                 </p>
                 {order.isDelivered ? (
                   <Message variant="success">
-                    Delivered on: {order.deliveredAt}
+                    Delivered on: {order.deliveredAt.substring(0, 19)}
                   </Message>
                 ) : (
                   <Message variant="warning">Not Delivered</Message>
@@ -148,9 +167,9 @@ function OrderPage() {
             </ListGroup>
           </Col>
           <Col md={4}>
-            <Card className="h-100 group-border">
+            <Card className="group-border">
               <ListGroup
-                className="h-100 justify-content-between  pt-3"
+                className="pt-3"
                 variant="flush"
               >
                 <ListGroupItem className="payment list-group-item">
@@ -196,6 +215,18 @@ function OrderPage() {
                   </ListGroupItem>
                 )}
               </ListGroup>
+              {loadingDeliver && <Loader />}
+              {userInfo && userInfo.is_admin && order.isPaid && !order.isDelivered && (
+                <ListGroupItem className="p-2">
+                  <Button
+                    type="button"
+                    className="btn btn-block"
+                    onClick={deliverHandler}
+                  >
+                    Mark as Deliver
+                  </Button>
+                </ListGroupItem>
+              )}
             </Card>
           </Col>
         </Row>
