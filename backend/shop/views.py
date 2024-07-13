@@ -165,13 +165,23 @@ def update_product(request, pk):
     return Response(serializer.data)
 
 
-
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def delete_product(request, pk):
     product = Product.objects.get(_id=pk)
     product.delete()
     return Response('Product was deleted')
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def update_image(request):
+    data = request.data
+    product_id = data['product_id']
+    product = Product.objects.get(_id=product_id)
+    product.image = request.FILES.get('image')
+    product.save()
+    return Response('Image was uploaded')
 
 
 @api_view(['POST'])
