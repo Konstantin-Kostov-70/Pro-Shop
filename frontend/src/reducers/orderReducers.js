@@ -13,6 +13,10 @@ import {
   ORDER_PAY_FAIL,
   ORDER_PAY_RESET,
 
+  LIST_ORDERS_REQUEST,
+  LIST_ORDERS_SUCCESS,
+  LIST_ORDERS_FAIL,
+
   LIST_MY_ORDERS_REQUEST,
   LIST_MY_ORDERS_SUCCESS,
   LIST_MY_ORDERS_FAIL,
@@ -127,6 +131,33 @@ export const listMyOrdersReducers = (state = {orders:[]}, action) => {
       return {
         orders: []
       };
+
+    default:
+      return state;
+  }
+};
+
+
+export const listOrdersReducers = (state = {orders:[]}, action) => {
+  switch (action.type) {
+
+    case LIST_ORDERS_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case LIST_ORDERS_SUCCESS:
+      return {
+        loading: false,
+        orders: action.payload,
+      };
+
+    case LIST_ORDERS_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
 
     default:
       return state;
