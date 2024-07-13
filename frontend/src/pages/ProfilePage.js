@@ -137,7 +137,7 @@ function ProfilePage() {
                             <th>Total</th>
                             <th>Paid</th>
                             <th>Delivered</th>
-                            {/* <th></th> */}
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -147,6 +147,9 @@ function ProfilePage() {
                                 <td>{order.createdAt.substring(0, 10)}</td>
                                 <td>${order.totalPrice}</td>
                                 <td>{order.isPaid ? order.paidAt.substring(0, 19) : (
+                                    <i className="fas fa-times"></i>
+                                )}</td>
+                                <td>{order.isDelivered ? order.deliveredAt.substring(0, 19) : (
                                     <i className="fas fa-times"></i>
                                 )}</td>
                                 <td>
