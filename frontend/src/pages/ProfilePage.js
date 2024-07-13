@@ -146,7 +146,7 @@ function ProfilePage() {
                                 <td>{order._id}</td>
                                 <td>{order.createdAt.substring(0, 10)}</td>
                                 <td>${order.totalPrice}</td>
-                                <td>{order.isPaid ? order.payAt.substring(0, 19) : (
+                                <td>{order.isPaid ? order.paidAt.substring(0, 19) : (
                                     <i className="fas fa-times"></i>
                                 )}</td>
                                 <td>

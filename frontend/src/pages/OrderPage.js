@@ -113,7 +113,7 @@ function OrderPage() {
                   {order.paymentMethod}
                 </p>
                 {order.isPaid ? (
-                  <Message variant="success">Paid on: {order.payAt.substring(0, 19)}</Message>
+                  <Message variant="success">Paid on: {order.paidAt.substring(0, 19)}</Message>
                 ) : (
                   <Message variant="warning">Not Paid</Message>
                 )}
