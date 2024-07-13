@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Form,
@@ -27,12 +28,16 @@ function ProductEditPage() {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [uploading, setUploading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { error, loading, product } = productDetails;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   const productUpdate = useSelector((state) => state.productUpdate);
   const {
@@ -73,6 +78,34 @@ function ProductEditPage() {
       description
     }));
   };
+
+  const uploadFileHandler = async(event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+
+    formData.append('image', file);
+    formData.append('product_id', id);
+    
+    setUploading(true);
+   
+    try {
+
+      const config = {
+        headers: {
+          'Content-type': 'multipart/form-data',
+          Authorization: `Bearer ${userInfo.token}`,
+        }
+      };
+
+      const {data} = await axios.post('/api/products/upload/', formData, config);
+
+      setUploading(false);
+      setImage(data)
+      
+    } catch (error) {
+      setUploading(false)
+    }
+  }
 
   return (
     <div>
@@ -120,6 +153,14 @@ function ProductEditPage() {
                 value={image}
                 onChange={(event) => setImage(event.target.value)}
               ></FormControl>
+
+              <FormControl
+                className="mb-3 login-input"
+                type="file"
+                placeholder="Chose image"
+                onChange={uploadFileHandler}
+              ></FormControl>
+              {uploading && <Loader />}
             </FormGroup>
 
             <FormGroup controlId="brand">
