@@ -16,6 +16,7 @@ import OrderPage from "./pages/OrderPage";
 import UserListPage from "./pages/UserListPage";
 import EditUserPage from "./pages/EditUserPage";
 import ProductListPage from "./pages/ProductListPage";
+import ProductEditPage from "./pages/ProductEditPage";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
             <Route path="/admin/users-list" element={<UserListPage />} />
             <Route path="/admin/user/:id/edit" element={<EditUserPage />} />
             <Route path="/admin/product-list" element={<ProductListPage />} />
+            <Route path="/admin/product/:id/edit" element={<ProductEditPage />} />
           </Routes>
         </Container>
       </main>

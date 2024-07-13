@@ -4,7 +4,8 @@ import { Table, Button, Row, Col } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { listProduct } from "../actions/productActions";
+import { listProduct,createProductAction ,deleteProductAction } from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 function ProductListPage() {
 
@@ -14,26 +15,48 @@ function ProductListPage() {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
+  const productCreate = useSelector((state) => state.productCreate);
+  const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate;
+
+  const productDelete = useSelector((state) => state.productDelete);
+  const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete;
+
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
 
   useEffect(() => {
-    if (userInfo && userInfo.is_admin) {
-        dispatch(listProduct());
-    } else {
-       navigate('/login');
+
+
+    if (!userInfo.is_admin) {
+        navigate('/login');
     }
-  }, [dispatch, userInfo, navigate]);
+
+    if (successCreate) {
+      dispatch({type:PRODUCT_CREATE_RESET})
+      navigate(`/admin/product/${createdProduct._id}/edit`)
+    } else {
+      dispatch(listProduct())
+    }
+  }, [
+    dispatch, 
+    navigate, 
+    userInfo, 
+    successDelete, 
+    successCreate, 
+    createdProduct
+  ]);
+
+
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure want to delete this product?')) {
-    //  delete logic
+       dispatch(deleteProductAction(id))
     }
   }
 
-  const createProductHandler = (product) => {
-    // create product
+  const createProductHandler = () => {
+    dispatch(createProductAction());
   }
 
   return (
@@ -48,6 +71,12 @@ function ProductListPage() {
            </Button>
         </Col>
       </Row>
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
+
+      {loadingDelete && <Loader />}
+      {errorDelete && <Message variant="danger">{errorDelete}</Message>}
+
       {loading ? (
         <Loader />
       ) : error ? (
