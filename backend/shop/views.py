@@ -253,11 +253,21 @@ def get_order_by_id(request, pk):
 def update_order_to_paid(request, pk):
     order = Order.objects.get(_id=pk )
     order.isPaid = True
-    order.payAt = datetime.now()
-
+    order.paidAt = datetime.now()
     order.save()
 
     return Response('Order is paid')
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def update_order_to_delivered(request, pk):
+    order = Order.objects.get(_id=pk )
+    order.isDelivered = True
+    order.deliveredAt = datetime.now()
+    order.save()
+
+    return Response('Order is delivered')
 
 
 @api_view(['GET'])
