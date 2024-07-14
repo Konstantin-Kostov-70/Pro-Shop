@@ -1,15 +1,14 @@
-from django.shortcuts import render
-
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.response import Response
-from rest_framework import status
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
-from .models import Product, Order, OrderItem, ShippingAddress
-from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.response import Response
+from rest_framework import status
+
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+from .models import Product, Order, OrderItem, ShippingAddress, Review
+from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
 from datetime import datetime
 
 
@@ -27,6 +26,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
+
+# =============== USER VIEWS =========================
 
 @api_view(['POST'])
 def register_user(request):
@@ -115,6 +116,9 @@ def update_user(request, pk):
     return Response(serializer.data)
 
 
+# =============== PRODUCT VIEWS =========================
+
+
 @api_view(['GET'])
 def get_products(request):
     products = Product.objects.all()
@@ -182,6 +186,45 @@ def update_image(request):
     product.image = request.FILES.get('image')
     product.save()
     return Response('Image was uploaded')
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_product_review(request, pk):
+    user = request.user
+    product = Product.objects.get(_id=pk)
+    data = request.data
+
+    already_exist = product.review_set.filter(user=user).exists()
+
+    if already_exist :
+        content = {'details': 'Product already reviewed'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif data['rating'] == 0 :
+        content = {'details': 'Please select a rating'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+    
+    else :
+        review = Review.objects.create(
+            user = user,
+            product = product,
+            name = user.first_name,
+            rating = data['rating'],
+            comment = data['comment'],
+        )
+        reviews = product.review_set.all()
+        total = sum(review.rating for review in reviews)
+
+        product.numReviews = len(reviews)
+        product.rating = total / len(reviews)
+
+        product.save()
+        
+        return Response('Review Added')
+
+
+# =============== ORDER VIEWS =========================
 
 
 @api_view(['POST'])
