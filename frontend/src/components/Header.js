@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { logout } from '../actions/userActions'
+import SearchBox from './SearchBox'
 
 function Header() {
 
@@ -22,7 +23,8 @@ function Header() {
           <Link to="/" className='navbar-brand'>
             ProShop
           </Link>
-          <Nav className="me-auto">
+          <SearchBox />
+          <Nav className="mr-auto">
             <Link to="/cart" className='nav-link'>
               <i className='fas fa-shopping-cart'></i><span className='nav-span'>Cart</span>
             </Link>

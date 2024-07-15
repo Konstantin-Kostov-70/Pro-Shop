@@ -2,19 +2,29 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col } from "react-bootstrap";
 import { listProduct } from "../actions/productActions";
+import {  useLocation } from 'react-router-dom'
 
 import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 
 function HomePage() {
+  
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const param = searchParams.get('keyword');
+  let keyword = ''
+  if (param) {
+    keyword = `?keyword=${param}`
+  }
+ 
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { error, loading, products } = productList;
 
   useEffect(() => {
-    dispatch(listProduct());
-  }, [dispatch]);
+    dispatch(listProduct(keyword));
+  }, [dispatch, keyword]);
 
   return (
     <div>

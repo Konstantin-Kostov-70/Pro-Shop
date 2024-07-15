@@ -119,6 +119,10 @@ h3 {
   color: green;
 }
 
+.fa-solid.fa-magnifying-glass {
+  font-size: 20px;
+}
+
 .fas.fa-edit,
 .fas.fa-trash  {
   color: black;
@@ -150,6 +154,10 @@ h3 {
 
 #products-wrapper {
   margin-bottom: 50px;
+}
+
+.mr-ms-2.ml-sm-5.search {
+  width: 350px;
 }
 
 /* ------ Stepper------ */

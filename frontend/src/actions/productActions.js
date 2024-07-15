@@ -27,11 +27,11 @@ import {
   
 } from "../constants/productConstants";
 
-export const listProduct = () => async (dispatch) => {
+export const listProduct = (keyword) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_LIST_REQUEST });
 
-    const { data } = await axios.get("/api/products");
+    const { data } = await axios.get(`/api/products${keyword}`);
 
     dispatch({
       type: PRODUCT_LIST_SUCCESS,
