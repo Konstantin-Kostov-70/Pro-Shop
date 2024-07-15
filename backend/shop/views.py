@@ -1,3 +1,7 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -5,8 +9,6 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
 from rest_framework import status
 
-from django.contrib.auth.models import User
-from django.contrib.auth.hashers import make_password
 from .models import Product, Order, OrderItem, ShippingAddress, Review
 from .serializers import ProductSerializer, UserSerializer, UserSerializerWithToken, OrderSerializer
 from datetime import datetime
@@ -126,8 +128,28 @@ def get_products(request):
         products = Product.objects.filter(name__icontains=query)
     else:
         products = Product.objects.all()
+    
+    page = request.query_params.get('page')
+    paginator = Paginator(products, 2)
+ 
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+    
+    page = int(page)
+    
     serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+    return Response({
+        'products': serializer.data,
+        'page': page, 
+        'pages': paginator.num_pages
+        })
 
 
 @api_view(['GET'])
