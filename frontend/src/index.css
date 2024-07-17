@@ -28,6 +28,10 @@ h2 {
     padding: 0.5rem 0;
 }
 
+.lp-heading {
+  margin-top: 25px;
+}
+
 .nav-span {
     margin-left: 8px;
 }
@@ -140,8 +144,6 @@ h3 {
 
 .form-check-input {
   margin: -5px 10px 0 0 !important;
-  /* margin-left: 0 !important;
-  margin-right: 10px !important; */
   border: 0.5px solid  gray !important;
 }
 
@@ -160,6 +162,28 @@ h3 {
   width: 350px;
 }
 
+.carousel-title-wrapper {
+  text-align: center;
+  position: absolute;
+  font-size: 2rem;
+  top: 150px;
+  right: 0;
+  width: 50%;
+}
+
+.carousel-title {
+  font-size: 2rem;
+  color: #4bb543;
+}
+
+.carousel-price {
+  font-size: 1.5rem;
+  color: #4bb543;
+}
+
+.img-fluid {
+  max-width: 50% !important;
+}
 
 /* ------ Stepper------ */
 
@@ -238,4 +262,47 @@ h3 {
     content: none;
   }
 
+  .search-responsive {
+    display: none ;
+  }
+
+/* ------- RESPONSIVE --------- */
+
+@media (max-width: 1200px) {
+
+  /* ---HEADER-------- */
+  .mr-ms-2.ml-sm-5.search {
+    width: 250px;
+  }
+  .nav-menu.container {
+    max-width: 100% ;
+    margin: 0;
+  }
+ 
+}
+
+@media (max-width: 768px) {
+   /* ---HEADER-------- */
+  .navbar.navbar-expand.navbar-light.bg-dark {
+    flex-direction: column;
+  }
+  .search-non-responsive {
+    display: none ;
+  }
+  .search-responsive {
+    display: block ;
+    width: 95%;
+    margin-bottom: 30px;
+  }
+  .mr-ms-2.ml-sm-5.search {
+    width: 100%;
+  }
+  .navbar-brand {
+    font-size: 15px !important;
+    margin-right: 15px !important;
+  }
+  .nav-item.dropdown {
+    margin-right: 10px !important;
+  }
+}
  

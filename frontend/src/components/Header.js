@@ -19,20 +19,25 @@ function Header() {
   return (
     <header>
      <Navbar bg="dark" data-bs-theme="dark">
+        <div className="search-responsive">
+          <SearchBox />
+        </div>
         <Container className='nav-menu'>
           <Link to="/" className='navbar-brand'>
             ProShop
           </Link>
-          <SearchBox />
+          <div className="search-non-responsive">
+            <SearchBox />
+        </div>
           <Nav className="mr-auto">
             <Link to="/cart" className='nav-link'>
               <i className='fas fa-shopping-cart'></i><span className='nav-span'>Cart</span>
             </Link>
             {userInfo ? (
               <NavDropdown title={userInfo.name} id='username'>
-                <Link to={'/profile'} className='dropdown-item'>
+                <NavDropdown.Item as={Link} to={'/profile'} className='dropdown-item'>
                    Profile
-                </Link>
+                </NavDropdown.Item>
                 <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
               </NavDropdown>
             ) : (
@@ -42,15 +47,15 @@ function Header() {
             )}
             {userInfo && userInfo.is_admin && (
               <NavDropdown title='Admin' id='admin-menu'>
-                <Link to={'/admin/users-list'} className='dropdown-item'>
+                <NavDropdown.Item as={Link} to={'/admin/users-list'} className='dropdown-item'>
                   Users
-                </Link>
-                <Link to={'/admin/product-list'} className='dropdown-item'>
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={'/admin/product-list'} className='dropdown-item'>
                   Products
-                </Link>
-                <Link to={'/admin/order-list'} className='dropdown-item'>
+                </NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={'/admin/order-list'} className='dropdown-item'>
                   Orders
-                </Link>
+                </NavDropdown.Item>
               </NavDropdown>
             )}
           </Nav>

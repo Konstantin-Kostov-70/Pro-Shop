@@ -8,6 +8,7 @@ import Product from "../components/Product";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Paginate from "../components/Paginate";
+import ProductCarousel from '../components/ProductCarousel'
 
 function HomePage() {
   const location = useLocation();
@@ -23,7 +24,9 @@ function HomePage() {
 
   return (
     <div>
-      <h1>Latest Products</h1>
+      <h1>Top Products</h1>
+      <ProductCarousel />
+      <h1 className="lp-heading">Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
