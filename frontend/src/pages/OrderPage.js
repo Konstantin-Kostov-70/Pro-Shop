@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getOrderDetails, payOrder, deliverOrderAction } from "../actions/orderActions";
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET} from '../constants/orderConstants'
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET, LIST_MY_ORDERS_REQUEST} from '../constants/orderConstants'
 
 
 function OrderPage() {
@@ -63,6 +63,7 @@ function OrderPage() {
 
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
+      dispatch({ type: LIST_MY_ORDERS_REQUEST });
       dispatch(getOrderDetails(id));
 
     } else if (!order.isPaid) {
