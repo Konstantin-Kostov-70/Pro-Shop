@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   Form,
@@ -28,6 +28,7 @@ function ProductEditPage() {
   const [category, setCategory] = useState("");
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
+  const [specification, setSpecification] = useState("");
   const [uploading, setUploading] = useState(false);
 
   const navigate = useNavigate();
@@ -67,45 +68,50 @@ function ProductEditPage() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch (updateProductAction({
-      _id: id,
-      name,
-      price,
-      image,
-      brand,
-      category,
-      countInStock,
-      description
-    }));
+    dispatch(
+      updateProductAction({
+        _id: id,
+        name,
+        price,
+        image,
+        brand,
+        category,
+        countInStock,
+        description,
+        specification,
+      })
+    );
   };
 
-  const uploadFileHandler = async(event) => {
+  const uploadFileHandler = async (event) => {
     const file = event.target.files[0];
     const formData = new FormData();
 
-    formData.append('image', file);
-    formData.append('product_id', id);
-    
-    setUploading(true);
-   
-    try {
+    formData.append("image", file);
+    formData.append("product_id", id);
 
+    setUploading(true);
+
+    try {
       const config = {
         headers: {
-          'Content-type': 'multipart/form-data',
+          "Content-type": "multipart/form-data",
           Authorization: `Bearer ${userInfo.token}`,
-        }
+        },
       };
 
-      const {data} = await axios.post('/api/products/upload/', formData, config);
+      const { data } = await axios.post(
+        "/api/products/upload/",
+        formData,
+        config
+      );
 
       setUploading(false);
-      setImage(data)
-      
+      setImage(data);
     } catch (error) {
-      setUploading(false)
+      setUploading(false);
     }
-  }
+  };
 
   return (
     <div>
@@ -205,6 +211,15 @@ function ProductEditPage() {
                 placeholder="Enter Description"
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
+              ></FormControl>
+              <FormLabel>Specification</FormLabel>
+              <FormControl
+                as="textarea"
+                className="mb-3 login-input"
+                type="text"
+                placeholder="Enter Specification"
+                value={specification}
+                onChange={(event) => setSpecification(event.target.value)}
               ></FormControl>
             </FormGroup>
 
