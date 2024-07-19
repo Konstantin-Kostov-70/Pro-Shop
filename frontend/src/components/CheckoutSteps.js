@@ -1,6 +1,6 @@
 import React from "react";
-import { Nav, NavItem, NavLink } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+import { Nav, NavItem } from "react-bootstrap";
+import { Link } from 'react-router-dom'
 
 function CheckoutSteps({ step1, step2, step3, step4 }) {
   return (
@@ -9,68 +9,52 @@ function CheckoutSteps({ step1, step2, step3, step4 }) {
       {step1 ? (
           <NavItem className="stepper-item completed">
           <NavItem className="step-counter">1</NavItem>
-          <LinkContainer to={'/login'}>
-            <NavLink className="step-name">Login</NavLink>
-          </LinkContainer>
+            <Link to={'/login'} className="step-name">Login</Link>
         </NavItem>
 
       ) : (
         <NavItem className="stepper-item">
         <NavItem className="step-counter">1</NavItem>
-        <LinkContainer to={'/login'}>
-          <NavLink className="step-name" disabled>Login</NavLink>
-        </LinkContainer>
+          <Link to={'/login'} className="step-name" disabled>Login</Link>
       </NavItem>
       )}
 
       {step2 ? (
           <NavItem className="stepper-item completed">
           <NavItem className="step-counter">2</NavItem>
-          <LinkContainer to={'/shipping'}>
-            <NavLink className="step-name">Shipping</NavLink>
-          </LinkContainer>
+            <Link to={'/shipping'} className="step-name">Shipping</Link>
         </NavItem>
 
       ) : (
         <NavItem className="stepper-item">
         <NavItem className="step-counter">2</NavItem>
-        <LinkContainer to={'/shipping'}>
-          <NavLink className="step-name" disabled>Shipping</NavLink>
-        </LinkContainer>
+          <Link to={'/shipping'} className="step-name" disabled>Shipping</Link>
       </NavItem>
       )}
 
        {step3 ? (
           <NavItem className="stepper-item completed">
           <NavItem className="step-counter">3</NavItem>
-          <LinkContainer to={'/payment'}>
-            <NavLink className="step-name">Payment</NavLink>
-          </LinkContainer>
+            <Link to={'/payment'} className="step-name">Payment</Link>
         </NavItem>
 
       ) : (
         <NavItem className="stepper-item">
         <NavItem className="step-counter">3</NavItem>
-        <LinkContainer to={'/payment'}>
-          <NavLink className="step-name" disabled>Payment</NavLink>
-        </LinkContainer>
+          <Link to={'/payment'} className="step-name" disabled>Payment</Link>
       </NavItem>
       )}
 
        {step4 ? (
           <NavItem className="stepper-item completed">
           <NavItem className="step-counter">4</NavItem>
-          <LinkContainer to={'/placeorder'}>
-            <NavLink className="step-name">Place Order</NavLink>
-          </LinkContainer>
+            <Link to={'/placeorder'} className="step-name">Place Order</Link>
         </NavItem>
 
       ) : (
         <NavItem className="stepper-item">
         <NavItem className="step-counter">4</NavItem>
-        <LinkContainer to={'/placeorder'}>
-          <NavLink className="step-name" disabled>Place Order</NavLink>
-        </LinkContainer>
+          <Link to={'/placeorder'} className="step-name" disabled>Place Order</Link>
       </NavItem>
       )}
     </Nav>
