@@ -204,6 +204,7 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
                 "countInStock": 10,
                 "category": "Category",
                 "description": "Description",
+                "specifications": "Specifications",
                 "rating": 4,
                 "numReviews": 10
             }
@@ -227,6 +228,7 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
             "countInStock": 10,
             "category": "Category",
             "description": "Description",
+            "specifications": "Specifications",
             "rating": 4,
             "numReviews": 10
         }
@@ -246,6 +248,7 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
         "countInStock": 10,
         "category": "Category",
         "description": "Description",
+        "specifications": "Specifications",
         "rating": 4,
         "numReviews": 10
     }
@@ -265,6 +268,7 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
         "countInStock": 0,
         "category": "Sample Category",
         "description": "",
+        "specifications": "",
         "rating": 0,
         "numReviews": 0
     }
@@ -282,7 +286,8 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
         "brand": "Brand",
         "countInStock": 10,
         "category": "Category",
-        "description": "Description"
+        "description": "Description",
+        "specifications": "Specifications"
     }
     ```
 - **Response:**
@@ -295,6 +300,7 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
         "countInStock": 10,
         "category": "Category",
         "description": "Description",
+        "specifications": "Specifications",
         "rating": 4,
         "numReviews": 10
     }
