@@ -14,7 +14,6 @@ const QuantityAdjuster = ({ qty, countInStock, onIncrease, onDecrease }) => {
           variant="outline-secondary"
           onClick={onDecrease}
           disabled={qty === 1}
-          style={{ minWidth: '40px' }}
         >
           -
         </Button>
@@ -24,7 +23,6 @@ const QuantityAdjuster = ({ qty, countInStock, onIncrease, onDecrease }) => {
           variant="outline-secondary"
           onClick={onIncrease}
           disabled={qty === countInStock}
-          style={{ minWidth: '40px' }}
         >
           +
         </Button>
