@@ -177,7 +177,8 @@ def create_product(request):
         brand = 'Sample brand',
         countInStock = 0,
         category = 'Sample Category', 
-        description = ''
+        description = '',
+        specification = ''
     )
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
@@ -196,6 +197,7 @@ def update_product(request, pk):
     product.countInStock = data['countInStock']
     product.category = data['category']
     product.description = data['description']
+    product.specification = data['specification']
 
     product.save()
     serializer = ProductSerializer(product, many=False)
