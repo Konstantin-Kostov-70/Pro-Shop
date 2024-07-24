@@ -352,9 +352,27 @@ def update_order_to_delivered(request, pk):
 @permission_classes([IsAdminUser])
 def orders(request):
     orders = Order.objects.all()
-    serializer = OrderSerializer(orders, many=True)
+    page = request.query_params.get('page')
+    paginator = Paginator(orders, 10)
 
-    return Response(serializer.data)
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+    
+    page = int(page)
+    serializer = OrderSerializer(orders, many=True)
+    print(orders)
+    return Response({
+        'orders': serializer.data,
+        'page': page, 
+        'pages': paginator.num_pages
+        })
 
 
 @api_view(['GET'])
