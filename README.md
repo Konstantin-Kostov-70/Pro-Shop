@@ -411,6 +411,142 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
     }
     ```
 
+### Get Order by ID
+- **Endpoint:** `/api/orders/{id}/`
+- **Method:** GET
+- **Permission:** Authenticated
+- **Response:**
+    ```json
+    {
+        "_id": "1",
+        "orderItems": [
+            {
+                "product": "1",
+                "name": "Product 1",
+                "qty": 2,
+                "price": 100.00,
+                "image": "/images/sample.jpg"
+            }
+        ],
+        "shippingAddress": {
+            "address": "123 Main St",
+            "city": "Anytown",
+            "postalCode": "12345",
+            "country": "USA"
+        },
+        "paymentMethod": "PayPal",
+        "taxPrice": 10.00,
+        "shippingPrice": 5.00,
+        "totalPrice": 215.00,
+        "isPaid": false,
+        "isDelivered": false,
+        "createdAt": "2024-01-01T00:00:00.000Z",
+        "updatedAt": "2024-01-01T00:00:00.000Z"
+    }
+    ```
+
+### Update Order to Paid
+- **Endpoint:** `/api/orders/{id}/pay/`
+- **Method:** PUT
+- **Permission:** Authenticated
+- **Response:**
+    ```json
+    {
+        "detail": "Order is paid"
+    }
+    ```
+
+### Update Order to Delivered
+- **Endpoint:** `/api/orders/{id}/deliver/`
+- **Method:** PUT
+- **Permission:** Admin
+- **Response:**
+    ```json
+    {
+        "detail": "Order is delivered"
+    }
+    ```
+
+### Get All Orders
+- **Endpoint:** `/api/orders/`
+- **Method:** GET
+- **Permission:** Admin
+- **Response:**
+    ```json
+    {
+        "orders": [
+            {
+                "_id": "1",
+                "user": {
+                    "_id": "1",
+                    "name": "John Doe"
+                },
+                "orderItems": [
+                    {
+                        "product": "1",
+                        "name": "Product 1",
+                        "qty": 2,
+                        "price": 100.00,
+                        "image": "/images/sample.jpg"
+                    }
+                ],
+                "shippingAddress": {
+                    "address": "123 Main St",
+                    "city": "Anytown",
+                    "postalCode": "12345",
+                    "country": "USA"
+                },
+                "paymentMethod": "PayPal",
+                "taxPrice": 10.00,
+                "shippingPrice": 5.00,
+                "totalPrice": 215.00,
+                "isPaid": false,
+                "isDelivered": false,
+                "createdAt": "2024-01-01T00:00:00.000Z",
+                "updatedAt": "2024-01-01T00:00:00.000Z"
+            }
+        ],
+        "page": 1,
+        "pages": 1
+    }
+    ```
+
+### Get My Orders
+- **Endpoint:** `/api/orders/myorders/`
+- **Method:** GET
+- **Permission:** Authenticated
+- **Response:**
+    ```json
+    [
+        {
+            "_id": "1",
+            "orderItems": [
+                {
+                    "product": "1",
+                    "name": "Product 1",
+                    "qty": 2,
+                    "price": 100.00,
+                    "image": "/images/sample.jpg"
+                }
+            ],
+            "shippingAddress": {
+                "address": "123 Main St",
+                "city": "Anytown",
+                "postalCode": "12345",
+                "country": "USA"
+            },
+            "paymentMethod": "PayPal",
+            "taxPrice": 10.00,
+            "shippingPrice": 5.00,
+            "totalPrice": 215.00,
+            "isPaid": false,
+            "isDelivered": false,
+            "createdAt": "2024-01-01T00:00:00.000Z",
+            "updatedAt": "2024-01-01T00:00:00.000Z"
+        }
+    ]
+    ```
+
 ## Pagination
 - The API supports pagination for endpoints that return a list of items. Use the `page` query parameter to navigate through pages.
 
