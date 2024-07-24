@@ -1,7 +1,7 @@
 import React from "react";
 import { Pagination, PageItem } from "react-bootstrap";
 
-function Paginate({ pages, page, keyword = '', isAdmin = false }) {
+function Paginate({ pages, page, keyword = '', isAdmin, baseUrl = false }) {
    if (keyword) {
     keyword = keyword.split('?keyword=')[1].split('&')[0]
    }
@@ -16,7 +16,7 @@ function Paginate({ pages, page, keyword = '', isAdmin = false }) {
                 key={x + 1}
                 href={!isAdmin 
                   ? `?keyword=${keyword}&page=${x + 1}`
-                  : `/admin/product-list/?keyword=${keyword}&page=${x + 1}`
+                  : `${baseUrl}?keyword=${keyword}&page=${x + 1}`
                   } 
               >      
                 {x + 1}
