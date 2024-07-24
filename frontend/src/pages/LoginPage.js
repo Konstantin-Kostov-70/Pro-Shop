@@ -38,7 +38,7 @@ function LoginPage() {
   };
 
   return (
-    <FormContainer>
+    <FormContainer className="form-shipping">
         <h1>Sign In</h1>
         {error && <Message variant='danger'>{error}</Message>}
         {loading && <Loader />}

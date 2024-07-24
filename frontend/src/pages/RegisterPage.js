@@ -48,7 +48,7 @@ function RegisterPage() {
     };
   
   return (
-    <FormContainer>
+    <FormContainer className="form-shipping">
          <h1>Register</h1>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}

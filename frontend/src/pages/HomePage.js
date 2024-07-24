@@ -24,18 +24,25 @@ function HomePage() {
 
   return (
     <div>
-      <h1>Top Products</h1>
+      <h1 className="heading">Top Products</h1>
       <ProductCarousel />
-      <h1 className="lp-heading">Latest Products</h1>
+      <h1 className="lp-heading heading">Latest Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-          <Row>
+          <Row className="card-non-responsive">
             {products.map((product) => (
               <Col key={product._id} sm="12" md="6" lg="4" xl="3">
+                <Product product={product} />
+              </Col>
+            ))}
+          </Row>
+          <Row className="card-responsive">
+            {products.map((product) => (
+              <Col key={product._id}>
                 <Product product={product} />
               </Col>
             ))}

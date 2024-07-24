@@ -28,7 +28,7 @@ function ShippingPage() {
   return (
     <Row>
         <CheckoutSteps step1 step2 />
-    <FormContainer>
+    <FormContainer className="form-shipping">
         <h1 className="heading">Shipping</h1>
         <Form onSubmit={submitHandler}>
         <FormGroup controlId="address">

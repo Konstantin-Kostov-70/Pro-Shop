@@ -53,7 +53,7 @@ function PlaceOrderPage() {
       <CheckoutSteps step1 step2 step3 step4 />
       <Row id='place-order-container' className='justify-content-between'>
       <h2 className='heading'>Place Order</h2>
-        <Col md={7}>
+        <Col md={7} className="order-items">
           <ListGroup variant='flush'>
             <ListGroupItem className='payment px-1 py-3'>
               <h4 className='heading-xs'>Shipping</h4>
@@ -80,7 +80,7 @@ function PlaceOrderPage() {
                 <ListGroup variant='flush'>
                   {cart.cartItems.map((item, index) => (
                     <ListGroupItem className='order-items' key={index}>
-                      <Row>
+                      <Row className='items-container'>
                         <Col md={2}>
                           <Image src={item.image}  alt={item.name} fluid/>
                         </Col>
@@ -98,11 +98,11 @@ function PlaceOrderPage() {
             </ListGroupItem>
           </ListGroup>
         </Col>
-        <Col md={4}>
+        <Col md={4} className="order-sum">
           <Card className='h-100'>
             <ListGroup className='h-100 justify-content-between' variant='flush'>
               <ListGroupItem>
-                <h4 className='heading-xs'>Order Summary</h4>
+                <h4 className='heading-sum'>Order Summary</h4>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>

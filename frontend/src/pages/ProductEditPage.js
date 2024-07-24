@@ -115,9 +115,9 @@ function ProductEditPage() {
 
   return (
     <div>
-      <Link to={"/admin/product-list"}>&lt;&lt; Go Back</Link>
-      <FormContainer>
-        <h1>Edit Product</h1>
+      <Link className="btn-back btn" to={"/admin/product-list"}>&lt;&lt; Go Back</Link>
+      <FormContainer className="form-shipping">
+        <h1 className="heading">Edit Product</h1>
 
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant="danger">{errorUpdate}</Message>}
@@ -223,7 +223,7 @@ function ProductEditPage() {
               ></FormControl>
             </FormGroup>
 
-            <Button className="my-4" type="submit" variant="primary">
+            <Button className="my-4 btn-up" type="submit" variant="primary">
               Update
             </Button>
           </Form>

@@ -98,7 +98,7 @@ function OrderPage() {
       <div>
         <Row id="place-order-container" className="justify-content-between">
           <h3 className="heading">Order: {order._id}</h3>
-          <Col md={7}>
+          <Col md={7} className="order-items">
             <ListGroup variant="flush">
               <ListGroupItem className="payment px-1 py-3">
                 <h4 className="heading-xs">Shipping</h4>
@@ -146,7 +146,7 @@ function OrderPage() {
                   <ListGroup variant="flush">
                     {order.orderItems.map((item, index) => (
                       <ListGroupItem className="order-items" key={index}>
-                        <Row>
+                        <Row className='items-container'>
                           <Col md={2}>
                             <Image src={item.image} alt={item.name} fluid />
                           </Col>
@@ -167,7 +167,7 @@ function OrderPage() {
               </ListGroupItem>
             </ListGroup>
           </Col>
-          <Col md={4}>
+          <Col md={4} className="order-sum">
             <Card className="group-border">
               <ListGroup
                 className="pt-3"

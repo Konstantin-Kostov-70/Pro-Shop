@@ -35,14 +35,14 @@ function UserListPage() {
 
   return (
     <div>
-      <h2>Users</h2>
+      <h2 className="heading">Users</h2>
       {loading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">{error}</Message>
       ) : (
         <Table striped bordered responsive hover className="table-sm">
-            <thead>
+            <thead className="th-res">
                 <tr>
                     <th>ID</th>
                     <th>NAME</th>
@@ -51,7 +51,7 @@ function UserListPage() {
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody className="tb-res">
                 {users.map(user => (
                     <tr key={user._id}>
                         <td>{user._id}</td>

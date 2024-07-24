@@ -12,6 +12,7 @@ import {
   FormGroup,
   FormLabel,
   FormControl,
+  Accordion,
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
@@ -34,7 +35,7 @@ function ProductPage() {
   const dispatch = useDispatch();
 
   const userLogin = useSelector((state) => state.userLogin);
-  const {userInfo} = userLogin;
+  const { userInfo } = userLogin;
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -47,11 +48,10 @@ function ProductPage() {
   } = productCreateReview;
 
   useEffect(() => {
-    
     if (successProductReview) {
-       setRating(0);
-       setComment('')
-       dispatch({type: PRODUCT_CREATE_REVIEW_RESET})
+      setRating(0);
+      setComment("");
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
 
     dispatch(listProductDetails(id));
@@ -75,17 +75,16 @@ function ProductPage() {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    dispatch(createProductReviewAction(
-      id, {
+    dispatch(
+      createProductReviewAction(id, {
         rating,
-        comment
-      }
-      
-    ))
-  }
+        comment,
+      })
+    );
+  };
 
   return (
-    <div>
+    <div className="product-container">
       <Link to="/" className="btn btn-light my-3">
         &lt;&lt; Back to shop
       </Link>
@@ -95,15 +94,15 @@ function ProductPage() {
         <Message variant="danger">{error}</Message>
       ) : (
         <div>
-          <Row>
-            <Col md={6}>
+          <Row className="justify-content-between">
+            <Col md={5}>
               <Image src={product.image} alt={product.name} fluid />
             </Col>
 
-            <Col md={3}>
+            <Col md={3} className="product-title-wrapper">
               <ListGroup variant="flush">
                 <ListGroupItem>
-                  <h3>{product.name}</h3>
+                  <h3 className="product-heading">{product.name}</h3>
                 </ListGroupItem>
 
                 <ListGroupItem>
@@ -115,21 +114,17 @@ function ProductPage() {
                 </ListGroupItem>
 
                 <ListGroupItem>Price: ${product.price}</ListGroupItem>
-
-                <ListGroupItem>
-                  Description: {product.description}
-                </ListGroupItem>
               </ListGroup>
             </Col>
 
-            <Col md={3}>
+            <Col md={3} className="product-card-wrapper">
               <Card>
                 <ListGroup variant="flush">
                   <ListGroupItem id="price">
                     <Row>
-                      <Col>Price:</Col>
+                      <Col>Total:</Col>
                       <Col>
-                        <strong>${product.price}</strong>
+                        <strong>${(product.price * qty).toFixed(2)}</strong>
                       </Col>
                     </Row>
                   </ListGroupItem>
@@ -170,15 +165,15 @@ function ProductPage() {
           </Row>
           <Row className="mt-4">
             <Col md={6}>
-              <h4>
-                Reviews
-              </h4>
-              {product.reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
+              <h4 className="review-title">Reviews</h4>
+              {product.reviews.length === 0 && (
+                <Message variant="info">No Reviews</Message>
+              )}
               <ListGroup>
-                {product.reviews.map(review => (
-                  <ListGroupItem key={review._id}>
+                {product.reviews.map((review) => (
+                  <ListGroupItem key={review._id} className="d-flex flex-column gap-2 review-details">
                     <strong>{review.name}</strong>
-                    <Rating value={review.rating} color='#f8e825' />
+                    <Rating value={review.rating} color="#f8e825" />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroupItem>
@@ -186,36 +181,38 @@ function ProductPage() {
                 <ListGroupItem className="py-2">
                   <h4>Write a Review</h4>
                   {loadingProductReview && <Loader />}
-                  {successProductReview && <Message variant='success'>Review Submitted</Message>}
-                  {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
+                  {successProductReview && (
+                    <Message variant="success">Review Submitted</Message>
+                  )}
+                  {errorProductReview && (
+                    <Message variant="danger">{errorProductReview}</Message>
+                  )}
 
                   {userInfo ? (
                     <Form onSubmit={submitHandler}>
                       <FormGroup controlId="rating" className="my-4">
                         <FormLabel>Rating</FormLabel>
                         <FormControl
-                          as='select'
+                          as="select"
                           value={rating}
                           onChange={(event) => setRating(event.target.value)}
                         >
-                          <option value=''>Select...</option>
-                          <option value='1'>1 - Poor</option>
-                          <option value='2'>2 - Fair</option>
-                          <option value='3'>3 - Good</option>
-                          <option value='4'>4 - Very Good</option>
-                          <option value='5'>5 - Excellent</option>
+                          <option value="">Select...</option>
+                          <option value="1">1 - Poor</option>
+                          <option value="2">2 - Fair</option>
+                          <option value="3">3 - Good</option>
+                          <option value="4">4 - Very Good</option>
+                          <option value="5">5 - Excellent</option>
                         </FormControl>
                       </FormGroup>
                       <FormGroup controlId="comment" className="mb-4">
                         <FormLabel>Comment</FormLabel>
-                        <FormControl 
+                        <FormControl
                           as="textarea"
-                          row='10'
+                          row="10"
                           value={comment}
                           onChange={(event) => setComment(event.target.value)}
-                        >
-
-                        </FormControl>
+                        ></FormControl>
                       </FormGroup>
                       <Button
                         disabled={loadingProductReview}
@@ -226,9 +223,23 @@ function ProductPage() {
                       </Button>
                     </Form>
                   ) : (
-                    <Message variant='info'>Please <Link to={'/login'}>Login</Link> to write a review</Message>
+                    <Message variant="info">
+                      Please <Link className="underline" to={"/login"}>Login</Link> to write a review
+                    </Message>
                   )}
                 </ListGroupItem>
+              </ListGroup>
+            </Col>
+            <Col md={6}>
+              <ListGroup>
+                <Accordion>
+                  <Accordion.Header><h5>Description:</h5></Accordion.Header>
+                  <Accordion.Body>{product.description}</Accordion.Body>
+                </Accordion>
+                <Accordion>
+                  <Accordion.Header><h5>Specification:</h5></Accordion.Header>
+                  <Accordion.Body>{product.specification}</Accordion.Body>
+                </Accordion>
               </ListGroup>
             </Col>
           </Row>

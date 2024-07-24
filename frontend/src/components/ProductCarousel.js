@@ -29,10 +29,10 @@ function ProductCarousel() {
                 <Carousel.Item key={product._id}>
                     <div className='carousel-title-wrapper'>
                       <h3 className='carousel-title'>{product.name}</h3>
-                      <h4 className='carousel-price'>${product.price}</h4>
+                      <h3 className='carousel-title carousel-price'>${product.price}</h3>
                     </div>
                     <Link to={`/product/${product._id}`}>
-                        <Image src={product.image} alt={product.name} fluid/>
+                        <Image className='carousel-image' src={product.image} alt={product.name} fluid/>
                     </Link>
                     <Carousel.Caption className='carousel.caption'>
                     </Carousel.Caption>

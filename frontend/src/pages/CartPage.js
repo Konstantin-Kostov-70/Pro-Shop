@@ -55,9 +55,9 @@ function CartPage() {
   };
 
   return (
-    <Row id="cart-items">
-      <Col md={8}>
-        <h1>Shopping Cart</h1>
+    <Row id="cart-items-wrapper">
+      <Col md={8} className="cart-items">
+        <h1 className="heading">Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
             Your cart is empty <Link className="underline" to="/">Go to Shop</Link>
@@ -66,7 +66,7 @@ function CartPage() {
           <ListGroup variant="flush">
             {cartItems.map((item) => (
               <ListGroupItem key={item.product}>
-                <Row>
+                <Row className="items-container">
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid />
                   </Col>
@@ -74,16 +74,27 @@ function CartPage() {
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
-                  <Col md={3}>
+                  <Col md={3}  className="cart-btn-wrapper">
                     <QuantityAdjuster
+                      className='qty'
                       qty={item.qty}
                       countInStock={item.countInStock}
                       onIncrease={() => increaseQty(item)}
                       onDecrease={() => decreaseQty(item)}
                     />
+                      <Button
+                      className="rm-btn"
+                      type="button"
+                      variant="light"
+                      onClick={() => removeFromCartHandler(item.product)}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                    
                   </Col>
                   <Col md={1}>
                     <Button
+                      id='rm-button-responsive'
                       type="button"
                       variant="light"
                       onClick={() => removeFromCartHandler(item.product)}
@@ -97,7 +108,7 @@ function CartPage() {
           </ListGroup>
         )}
       </Col>
-      <Col md={4}>
+      <Col md={4} className="checkout-wrapper">
         <Card className="checkout">
           <ListGroup variant="flush">
             <ListGroupItem>

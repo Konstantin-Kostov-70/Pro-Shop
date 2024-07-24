@@ -70,9 +70,9 @@ function ProfilePage() {
       }
     };
   return (
-    <Row>
+    <Row className="profile-container">
         <Col md={3}>
-            <h2>User Profile</h2>
+            <h2 className="heading">User Profile</h2>
             {message && <Message variant='danger'>{message}</Message>}
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader />}
@@ -119,18 +119,18 @@ function ProfilePage() {
                     >
                     </FormControl>
                 </FormGroup>
-                <Button className="my-4" type="submit" variant="primary">Update</Button>
+                <Button className="my-4 btn-up" type="submit" variant="primary">Update</Button>
             </Form>
         </Col>
         <Col md={9}>
-            <h2>My Orders</h2>
+            <h2 className="heading">My Orders</h2>
             {loadingOrders ? (
                 <Loader />
             ) : errorOrders ? (
                 <Message variant='danger'>{errorOrders}</Message>
             ) : (
-                <Table striped responsive className="table-sm">
-                    <thead>
+                <Table striped responsive className="table-sm table-res">
+                    <thead className="th-res">
                         <tr>
                             <th>ID</th>
                             <th>Date</th>
@@ -154,7 +154,7 @@ function ProfilePage() {
                                 )}</td>
                                 <td>
                                     <Link to={`/order/${order._id}`}>
-                                        <Button className="btn-sm">
+                                        <Button className="btn-sm btn-res">
                                             Details
                                         </Button>
                                     </Link>

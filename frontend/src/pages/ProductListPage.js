@@ -16,6 +16,7 @@ function ProductListPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const baseUrl = '/admin/product-list/'
 
   const keyword = location.search
 
@@ -76,10 +77,10 @@ function ProductListPage() {
     <div>
       <Row id="products-wrapper" className="align-items-center">
         <Col>
-          <h2>Products</h2>
+          <h2 className="heading product">Products</h2>
         </Col>
         <Col className="text-right d-flex justify-content-end">
-          <Button className="my-3" onClick={createProductHandler}>
+          <Button className="my-3 btn-create" onClick={createProductHandler}>
             <i className="fas fa-plus"></i> Create Product
           </Button>
         </Col>
@@ -97,7 +98,7 @@ function ProductListPage() {
       ) : (
         <div>
           <Table striped bordered responsive hover className="table-sm">
-            <thead>
+            <thead className="th-res">
               <tr>
                 <th>ID</th>
                 <th>NAME</th>
@@ -137,6 +138,7 @@ function ProductListPage() {
             page={page}
             pages={pages}
             isAdmin={true}
+            baseUrl={baseUrl}
           />
         </div>
       )}
