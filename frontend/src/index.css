@@ -365,25 +365,20 @@ h3 {
   .carousel-title-wrapper {
     top: 70px;
   }
-
   .carousel-title {
     line-height: 36px;
     font-size: 1.3rem;
   }
-
   .product-heading {
     font-size: 1.1rem;
   }
-
   #minus-btn {
     margin-left: 10px;
   }
-
   #minus-btn,
   #plus-btn {
     padding: 6px 10px 6px 10px;
   }
-
   #price,
   #status {
     height: 45px;
@@ -437,7 +432,9 @@ h3 {
   .btn-sm.edit.btn.btn-primary {
     padding: 4px 8px;
   }
-
+  .footer {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 767px) {
@@ -576,6 +573,9 @@ h3 {
   #products-wrapper {
     margin-bottom: 20px;
   }
+  .footer {
+    font-size: 0.8rem;
+  }
  
 }
 
@@ -628,6 +628,9 @@ h3 {
   .table-sm td, 
   .table-sm th {
     padding: 0.4rem !important;
+  }
+  .footer {
+    font-size: 0.7rem;
   }
 }
  
