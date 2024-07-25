@@ -85,15 +85,19 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
 - **Permission:** Admin
 - **Response:**
     ```json
-    [
-        {
-            "id": 1,
-            "username": "johndoe@example.com",
-            "email": "johndoe@example.com",
-            "first_name": "John",
-            "is_admin": false
-        }
-    ]
+    {
+        "users": [
+            {
+                "id": 1,
+                "username": "johndoe@example.com",
+                "email": "johndoe@example.com",
+                "first_name": "John",
+                "is_admin": false
+            }
+        ],
+        "page": 1,
+        "pages": 1
+    }
     ```
 
 ### Get User Profile
