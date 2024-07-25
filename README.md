@@ -521,34 +521,38 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
 - **Permission:** Authenticated
 - **Response:**
     ```json
-    [
-        {
-            "_id": "1",
-            "orderItems": [
-                {
-                    "product": "1",
-                    "name": "Product 1",
-                    "qty": 2,
-                    "price": 100.00,
-                    "image": "/images/sample.jpg"
-                }
-            ],
-            "shippingAddress": {
-                "address": "123 Main St",
-                "city": "Anytown",
-                "postalCode": "12345",
-                "country": "USA"
-            },
-            "paymentMethod": "PayPal",
-            "taxPrice": 10.00,
-            "shippingPrice": 5.00,
-            "totalPrice": 215.00,
-            "isPaid": false,
-            "isDelivered": false,
-            "createdAt": "2024-01-01T00:00:00.000Z",
-            "updatedAt": "2024-01-01T00:00:00.000Z"
-        }
-    ]
+    {
+        "orders": [
+            {
+                "_id": "1",
+                "orderItems": [
+                    {
+                        "product": "1",
+                        "name": "Product 1",
+                        "qty": 2,
+                        "price": 100.00,
+                        "image": "/images/sample.jpg"
+                    }
+                ],
+                "shippingAddress": {
+                    "address": "123 Main St",
+                    "city": "Anytown",
+                    "postalCode": "12345",
+                    "country": "USA"
+                },
+                "paymentMethod": "PayPal",
+                "taxPrice": 10.00,
+                "shippingPrice": 5.00,
+                "totalPrice": 215.00,
+                "isPaid": false,
+                "isDelivered": false,
+                "createdAt": "2024-01-01T00:00:00.000Z",
+                "updatedAt": "2024-01-01T00:00:00.000Z"
+            }
+        ],
+        "page": 1,
+        "pages": 1
+    }
     ```
 
 ## Pagination

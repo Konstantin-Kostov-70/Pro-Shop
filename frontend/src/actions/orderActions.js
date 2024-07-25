@@ -222,7 +222,7 @@ export const listOrdersActions = (keyword = '') => async (dispatch, getState) =>
 };
 
 
-export const listMyOrders = () => async (dispatch, getState) => {
+export const listMyOrders = (keyword = '') => async (dispatch, getState) => {
   try {
     dispatch({
       type: LIST_MY_ORDERS_REQUEST,
@@ -239,7 +239,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get('/api/orders/myorders/', config);
+    const { data } = await axios.get(`/api/orders/myorders/${keyword}`, config);
     
     dispatch({
       type: LIST_MY_ORDERS_SUCCESS,

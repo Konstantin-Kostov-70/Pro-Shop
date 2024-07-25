@@ -397,9 +397,27 @@ def orders(request):
 @permission_classes([IsAuthenticated])
 def my_orders(request):
     user = request.user
-    order = user.order_set.all()
-    serializer = OrderSerializer(order, many=True)
+    orders = user.order_set.all()
+    page = request.query_params.get('page')
+    paginator = Paginator(orders, 10)
 
-    return Response(serializer.data)
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+    
+    page = int(page)
+    serializer = OrderSerializer(orders, many=True)
+
+    return Response({
+        'orders': serializer.data,
+        'page': page, 
+        'pages': paginator.num_pages
+        })
 
 
