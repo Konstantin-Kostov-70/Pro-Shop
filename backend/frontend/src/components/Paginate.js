@@ -15,8 +15,8 @@ function Paginate({ pages, page, keyword = '', isAdmin, baseUrl = false }) {
                 active={x + 1 === page}
                 key={x + 1}
                 href={!isAdmin 
-                  ? `?keyword=${keyword}&page=${x + 1}`
-                  : `${baseUrl}?keyword=${keyword}&page=${x + 1}`
+                  ? `/#/?keyword=${keyword}&page=${x + 1}`
+                  : `${baseUrl}/#/?keyword=${keyword}&page=${x + 1}`
                   } 
               >      
                 {x + 1}
