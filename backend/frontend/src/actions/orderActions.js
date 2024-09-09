@@ -237,7 +237,6 @@ export const listMyOrders = (keyword = '') => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    console.log('KEYWORD: ', keyword);
     
     const { data } = await axios.get(`/api/orders/myorders/${keyword}`, config);
     
