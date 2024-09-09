@@ -23,6 +23,7 @@ function OrderListPage() {
 
   useEffect(() => {
     if (userInfo && userInfo.is_admin) {
+      
       dispatch(listOrdersActions(keyword));
     } else {
       navigate("/login");

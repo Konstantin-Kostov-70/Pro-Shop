@@ -203,7 +203,6 @@ export const listOrdersActions = (keyword = '') => async (dispatch, getState) =>
     };
 
     const { data } = await axios.get(`/api/orders/${keyword}`, config);
-    console.log(data);
     
     dispatch({
       type: LIST_ORDERS_SUCCESS,
@@ -238,7 +237,8 @@ export const listMyOrders = (keyword = '') => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-
+    console.log('KEYWORD: ', keyword);
+    
     const { data } = await axios.get(`/api/orders/myorders/${keyword}`, config);
     
     dispatch({
