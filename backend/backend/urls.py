@@ -6,9 +6,10 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html')),
+    #path('', TemplateView.as_view(template_name='index.html')),
     path('admin/', admin.site.urls),
     path('api/', include('shop.urls')),
+    re_path(r'^(?!admin|api|static|staticfiles|media|images).*$', TemplateView.as_view(template_name='index.html')),
 
 
 ]
