@@ -1,6 +1,6 @@
 # E-commerce Website
 
-This project is a full-featured e-commerce website built using React, Redux, Django, and Django REST Framework (DRF). It provides a seamless shopping experience with robust user authentication, product management, and order processing functionalities.
+This project is a full-featured e-commerce website built using React, Redux and Django REST Framework (DRF). It provides a seamless shopping experience with robust user authentication, product management, and order processing functionalities.
 
 ## Key Features
 - **User Authentication**: JWT-based authentication for secure login and registration.
