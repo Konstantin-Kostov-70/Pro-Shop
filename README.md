@@ -579,12 +579,8 @@ Authentication is handled using JWT (JSON Web Tokens). Users must obtain a token
     ```sh
     python manage.py createsuperuser
     ```
-6. Run the development server:
-    ```sh
-    python manage.py runserver
-    ```
-
 ## Running the Server
 To run the server, use the following command:
 ```sh
 python manage.py runserver
+```
