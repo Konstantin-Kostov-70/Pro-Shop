@@ -1,4 +1,5 @@
 # E-commerce Website
+![proshop](https://github.com/user-attachments/assets/366ea9ef-d16c-4336-ba26-89fb09ca9b21)
 
 This project is a full-featured e-commerce website built using React, Redux and Django REST Framework (DRF). It provides a seamless shopping experience with robust user authentication, product management, and order processing functionalities.
 
